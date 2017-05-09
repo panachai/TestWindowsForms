@@ -52,6 +52,10 @@ namespace TestWindowsForms {
         private void cbMonth_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
+
+        private void lbTest_Click(object sender, EventArgs e) {
+
+        }
     }
 
 
@@ -62,48 +66,34 @@ namespace TestWindowsForms {
 
             if (month.Equals("มกราคม")) {
                 result = 01;
-            }
-            else if (month.Equals("กุมภาพันธ์")) {
+            } else if (month.Equals("กุมภาพันธ์")) {
                 result = 02;
-            }
-            else if (month.Equals("มีนาคม")) {
+            } else if (month.Equals("มีนาคม")) {
                 result = 03;
-            }
-            else if (month.Equals("เมษายน")) {
+            } else if (month.Equals("เมษายน")) {
                 result = 04;
-            }
-            else if (month.Equals("พฤษภาคม")) {
+            } else if (month.Equals("พฤษภาคม")) {
                 result = 05;
-            }
-            else if (month.Equals("มิถุนายน")) {
+            } else if (month.Equals("มิถุนายน")) {
                 result = 06;
-            }
-            else if (month.Equals("กรกฎาคม")) {
+            } else if (month.Equals("กรกฎาคม")) {
                 result = 07;
-            }
-            else if (month.Equals("สิงหาคม")) {
+            } else if (month.Equals("สิงหาคม")) {
                 result = 08;
-            }
-            else if (month.Equals("กันยายน")) {
+            } else if (month.Equals("กันยายน")) {
                 result = 09;
-            }
-            else if (month.Equals("ตุลาคม")) {
+            } else if (month.Equals("ตุลาคม")) {
                 result = 10;
-            }
-            else if (month.Equals("พฤศจิกายน")) {
+            } else if (month.Equals("พฤศจิกายน")) {
                 result = 11;
-            }
-            else if (month.Equals("ธันวาคม")) {
+            } else if (month.Equals("ธันวาคม")) {
                 result = 12;
-            }
-            else {
+            } else {
                 result = 0;
             }
 
             return OnGetDayByMonth(year, result);
         }
-
-        private int startBeforeWeek;  //test วางไว้นอก class
 
         public String OnGetDayByMonth(int year, int indexMonth) {
 
@@ -111,74 +101,118 @@ namespace TestWindowsForms {
             int lastMonth = DateTime.DaysInMonth(year, indexMonth);
             int startWeek = (int)new DateTime(year, indexMonth, 1).DayOfWeek;
 
+            //เก็บจำนวนสัปดาห์
+            int weekCount = 0;
+
+            if (startWeek == 0) {
+                startWeek = 7;
+            }
+
             //เก็บค่า
             string dayMonth = "";
 
             //ก่อนเดือนหลัก
             int lastMonthBeforeWeek = 0;
-            
 
             int count = 1;
-            if (startWeek != 1) {   //ทำค่าก่อนหน้า ของเดือนนี้
 
-
-                if (indexMonth != 1) {
-                    //Console.WriteLine("index month : " + indexMonth);
-                    startBeforeWeek = (int)new DateTime(year, indexMonth - 1, 1).DayOfWeek;
-
+            if (startWeek > 1)//ทำค่าก่อนหน้า ของเดือนนี้
+            {
+                System.Diagnostics.Debug.WriteLine("in loop startweek");
+                if (indexMonth > 1) {
                     lastMonthBeforeWeek = DateTime.DaysInMonth(year, indexMonth - 1);
-                }
-                else {
-                    startBeforeWeek = (int)new DateTime(year - 1, 12, 1).DayOfWeek;
-
+                } else {
                     lastMonthBeforeWeek = DateTime.DaysInMonth(year - 1, 12);
                 }
 
-                Console.WriteLine("StartBefore : " + startBeforeWeek);
-
                 int copyLMBW = lastMonthBeforeWeek;
-                int copySBFW = startBeforeWeek;
+                //int copySBFW = startBeforeWeek;
+                int copySW = startWeek;
 
-                while (copySBFW != 1) {
+                while (copySW > 2) //เพราะมีแก้ไขเว้นวรรค เลยต้องใช้ 2
+                {
                     dayMonth = "   " + copyLMBW + dayMonth;
                     copyLMBW--;
-                    copySBFW--;
+                    copySW--;
                 }
 
+                dayMonth = copyLMBW + dayMonth; //แก้ไข ไม่ให้มีเว้นวรรคด้านหน้า
+
                 dayMonth += "   ";//เว้นก่อนลง ปฏิทินหลัก
-                Console.WriteLine("before DayMonth : " + dayMonth);
+                System.Diagnostics.Debug.WriteLine("end loop start week");
             }
 
             int checkfirstloop = 0;
-            
-          
 
             for (int i = 1; i <= lastMonth; i++) {
-                dayMonth += i + "   ";
+                if (i >= 1 && i <= 9) //เอาไว้จัดหน้าให้สวย
+                {
+                    dayMonth += "  " + i + "   ";
+                } else {
+                    dayMonth += i + "   ";
+                }
+
 
                 if (checkfirstloop == 0) {
                     //startBeforeWeek
-                   
-
-                    if (count == 7 - startBeforeWeek) {
+                    if (count >= 8 - startWeek) //8 - 
+                    {
+                        System.Diagnostics.Debug.WriteLine("Startweek : " + startWeek);
+                        System.Diagnostics.Debug.WriteLine("Count : " + count);
                         count = 1;
                         dayMonth += "\n";
                         checkfirstloop = 1;
+
+                        System.Diagnostics.Debug.WriteLine("\nCount in loop day : " + i + " count : " + count);
+                        weekCount++;
+                        continue;
                     }
-                }
-                else {
-                    if (count == 7) {
+                } else {
+                    if (count >= 7) {
                         count = 1;
                         dayMonth += "\n";
+
+                        System.Diagnostics.Debug.WriteLine("\nCount in loop day : " + i + " count : " + count);
+                        weekCount++;
+                        continue;
                     }
                 }
+
+                System.Diagnostics.Debug.WriteLine("\nCount in loop day : " + i + " count : " + count);
                 count++;
+
+
             }
 
-            //System.Diagnostics.Debug.WriteLine("test : " + startWeek);
-            //System.Diagnostics.Debug.WriteLine("test weekname : " + new DateTime(year, indexMonth, 1).DayOfWeek);
+            //เก็บเศษเดือนที่เหลือ
+            Boolean loop = true;
+            int dayLast = 1;
+            while (loop) {
+                //dayMonth += dayLast + "   ";
 
-            //System.Diagnostics.Debug.WriteLine(dayMonth);
+                if (dayLast >= 1 && dayLast <= 9) {//เอาไว้จัดหน้าให้สวย
+                    dayMonth += "  " + dayLast + "   ";
+                } else {
+                    dayMonth += dayLast + "   ";
+                }
+
+                if (count >= 7) {
+                    count = 1;
+                    dayMonth += "\n";
+
+                    weekCount++;
+                    if (weekCount >= 6) {
+                        loop = false;
+                    }
+                    dayLast++;
+                    continue;
+                }
+                count++;
+                dayLast++;
+
+            }
+
+            System.Diagnostics.Debug.WriteLine("end weekcount : " + weekCount);
 
             return dayMonth;
         }
