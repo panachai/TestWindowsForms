@@ -102,6 +102,9 @@ namespace TestWindowsForms {
 
             return OnGetDayByMonth(year, result);
         }
+
+        private int startBeforeWeek;  //test วางไว้นอก class
+
         public String OnGetDayByMonth(int year, int indexMonth) {
 
             //เดือนหลัก
@@ -113,7 +116,7 @@ namespace TestWindowsForms {
 
             //ก่อนเดือนหลัก
             int lastMonthBeforeWeek = 0;
-            int startBeforeWeek;
+            
 
             int count = 1;
             if (startWeek != 1) {   //ทำค่าก่อนหน้า ของเดือนนี้
@@ -136,8 +139,8 @@ namespace TestWindowsForms {
                 int copyLMBW = lastMonthBeforeWeek;
                 int copySBFW = startBeforeWeek;
 
-                while (startBeforeWeek != 1) {
-                    dayMonth = "   " + lastMonthBeforeWeek + dayMonth;
+                while (copySBFW != 1) {
+                    dayMonth = "   " + copyLMBW + dayMonth;
                     copyLMBW--;
                     copySBFW--;
                 }
@@ -147,7 +150,7 @@ namespace TestWindowsForms {
             }
 
             int checkfirstloop = 0;
-
+            
           
 
             for (int i = 1; i <= lastMonth; i++) {
@@ -156,6 +159,7 @@ namespace TestWindowsForms {
                 if (checkfirstloop == 0) {
                     //startBeforeWeek
                    
+
                     if (count == 7 - startBeforeWeek) {
                         count = 1;
                         dayMonth += "\n";
