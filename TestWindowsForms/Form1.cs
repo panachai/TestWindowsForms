@@ -184,7 +184,7 @@ namespace TestWindowsForms {
 
             }
 
-            //เก็บเศษเดือนส่วนกลาง
+            //เก็บเศษเดือนที่เหลือ
             Boolean loop = true;
             int dayLast = 1;
             while (loop) {
