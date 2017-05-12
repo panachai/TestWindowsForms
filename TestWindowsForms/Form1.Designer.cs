@@ -27,7 +27,6 @@
             this.tbYear = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.rtbResult = new System.Windows.Forms.RichTextBox();
-            this.lbTest = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbMonth
@@ -75,27 +74,16 @@
             this.rtbResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.rtbResult.Location = new System.Drawing.Point(13, 41);
             this.rtbResult.Name = "rtbResult";
-            this.rtbResult.Size = new System.Drawing.Size(522, 274);
+            this.rtbResult.Size = new System.Drawing.Size(310, 230);
             this.rtbResult.TabIndex = 3;
             this.rtbResult.Text = "";
             this.rtbResult.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            // 
-            // lbTest
-            // 
-            this.lbTest.AutoSize = true;
-            this.lbTest.Location = new System.Drawing.Point(12, 329);
-            this.lbTest.Name = "lbTest";
-            this.lbTest.Size = new System.Drawing.Size(35, 13);
-            this.lbTest.TabIndex = 4;
-            this.lbTest.Text = "label1";
-            this.lbTest.Click += new System.EventHandler(this.lbTest_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(574, 417);
-            this.Controls.Add(this.lbTest);
+            this.ClientSize = new System.Drawing.Size(333, 293);
             this.Controls.Add(this.rtbResult);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tbYear);
@@ -114,7 +102,6 @@
         private System.Windows.Forms.TextBox tbYear;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox rtbResult;
-        private System.Windows.Forms.Label lbTest;
     }
 }
 
